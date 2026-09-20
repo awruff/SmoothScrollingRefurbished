@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "id": "smoothscrollingrefurbished",
-  "version": "${version}",
-  "name": "Smooth Scrolling Refurbished",
+  "version": "${mod_version}",
+  "name": "${mod_name}",
   "description": "Changes most scrollbars in the game to scroll smoothly.",
   "authors": [
     "JustAlittleWolf"
@@ -17,19 +17,14 @@
   "entrypoints": {
     "client": [
       "me.wolfii.smoothscrollingrefurbished.SmoothScrollingRefurbishedClient"
-    ],
-    "modmenu": [
-      "me.wolfii.smoothscrollingrefurbished.config.ModMenuIntegration"
     ]
   },
   "mixins": [
-    "smoothscrollingrefurbished.mixins.json"
+    "mixins.smoothscrollingrefurbished.json"
   ],
   "depends": {
-    "fabricloader": ">=0.19.0",
-    "minecraft": ">=${minecraft_version}"
-  },
-  "suggests": {
-    "modmenu": "*"
+    "fabricloader": ">=${loader_version}",
+    "minecraft": "${minecraft_version}",
+    "oneconfigv1": "*"
   }
 }
