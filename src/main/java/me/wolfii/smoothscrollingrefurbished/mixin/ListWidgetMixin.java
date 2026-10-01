@@ -35,6 +35,10 @@ public abstract class ListWidgetMixin {
     private void applyMotion(float delta) {
         this.scrollAmount += (float) (ScrollMath.scrollbarVelocity(this.animationTimer, this.scrollStartVelocity) * delta);
         this.animationTimer += delta * 10;
+        if (!SmoothScrollingConfig.pushBack && (this.scrollAmount < 0 || this.scrollAmount > this.getMaxScroll())) {
+            this.scrollStartVelocity = 0;
+            this.animationTimer = 0;
+        }
     }
 
     @Unique
@@ -69,12 +73,7 @@ public abstract class ListWidgetMixin {
             return;
         }
 
-        if (SmoothScrollingConfig.pushBack) {
-            this.checkOutOfBounds(delta);
-        } else if (this.scrollAmount <= 0 || this.scrollAmount >= this.getMaxScroll()) {
-            this.scrollStartVelocity = 0;
-            this.animationTimer = 0;
-        }
+        if (SmoothScrollingConfig.pushBack) this.checkOutOfBounds(delta);
 
         if (Math.abs(ScrollMath.scrollbarVelocity(this.animationTimer, this.scrollStartVelocity)) < 1.0) return;
         this.applyMotion(delta);
